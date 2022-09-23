@@ -1,0 +1,94 @@
+
+<div class="card">
+           <div class="card-header">
+            Search News Articles
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="searchKeyword">Keyword to Search</label>
+                  <input type="text" class="form-control" id="searchKeyword" placeholder="Enter keyword to search for" required="">
+                  <small class="form-text text-muted">
+                    The keyword to search can contain <b>AND, OR, NOT</b>. <a href="#" id="q_more" onclick="showDetails()">More</a>
+                      <div id="q_more_details">
+                        <hr>
+                        <h6>Phrase search operator (Exact match)</h6>
+                        To use the phrase search operator surrounds your phrase with quotes like so <b>"Apple iPhone"</b>.
+                        
+                        <hr>
+                        <h6>Operator AND</h6>
+                        There are two ways to use the AND operator.
+                        <ol>
+                          <li>Add this  <b>AND</b>  between each word or phrase (e.g. <b>Apple AND Microsoft</b>)</li>
+                          <li>Add a space between each word or phrase (e.g. <b>Apple Microsoft</b>)</li>
+                        </ol>
+
+                        <hr>
+                        <h6>Operator OR</h6>
+                        First of all, note that the operator OR has a higher precedence than the operator AND. To use the OR operator add this  <b>OR</b>  between each word or phrase (e.g. <b>Apple OR Microsoft</b>).
+
+                        Due to the higher precedence of the operator OR the following query will not work as expected <b>Apple AND iPhone OR Microsoft</b>. When we read this expression we thought that the query will look first for articles that contain the word Apple and iPhone and then if no article found, look for articles that contain Microsoft. Actually this is not what is going to happen the OR will be executed first so the result will make no sense because the query will look for <b>Apple AND iPhone</b> or <b>Apple AND Microsoft</b>. To fix this query we have to add parenthesises, like so <b>(Apple AND iPhone) OR Microsoft</b>.
+
+                        <hr>
+                        <h6>Operator NOT</h6>
+                        To use the NOT operator add this <b>NOT</b>  before each word or phrase (e.g. <b>Apple AND NOT iPhone</b>). Articles that contain the word iPhone will be removed from the results.
+                        
+                        <hr>
+                        <a href="#" id="q_less" onclick="hideDetails()">Less</a>
+                      </div>
+                  </small>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="searchIn">Search In</label>
+                  <div class="form-control no-border">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="title" value="title">
+                      <label class="form-check-label" for="title">Title</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="description" value="description">
+                      <label class="form-check-label" for="description">Description</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="content" value="content">
+                      <label class="form-check-label" for="content">Content</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="maxSearchNews">Number of Articles</label>
+                  <input type="number" min=1 max=20 class="form-control" id="maxSearchNews"name="maxSearchNews" placeholder="Enter number of articles" required="" value="20">
+                  <small class="form-text text-muted">
+                    The maximum number of articles can be 20.
+                  </small>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="langSearchNews">Select Language</label>
+                  <select class="form-control" id="langSearchNews" name="langSearchNews" required="">
+                    {% block search_news_lang_options %}
+                       {% include "GNews/lang_options.html" %}
+                    {% endblock %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-11"></div>
+                <div class="form-group col-md-1">
+                    <button type="button" class="btn btn-info float-right" onclick="searchNews()">Search</button>                  
+                </div>
+              </div>
+            </form>
+            <div class="card" id="searchNewsResults">
+              <div class="card-header">
+                  Results
+              </div>
+              <div class="card-body">
+                <div id="searchNewsJsonViewer"></div>
+              </div>
+            </div>         
+          </div>
+        </div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %} <link rel="stylesheet" href="{% static 'GNews/css/custom.css' %}">
+  {% load static %} <link rel="stylesheet" href="{% static 'GNews/css/jquery.json-viewer.css' %}">
+  {% load static %} <link rel="stylesheet" href="{% static 'GNews/css/bootstrap.min.css' %}">
+  {% load static %} <link rel="stylesheet" href="{% static 'GNews/css/HoldOn.min.css' %}">
+  
+  {% load static %} <link rel="icon" type="image/ico" href="{% static 'GNews/images/favicon.ico' %}">
+
+  {% load static %} <script type="text/javascript" src="{% static 'GNews/js/jquery.min.js' %}"></script>
+  {% load static %} <script type="text/javascript" src="{% static 'GNews/js/popper.min.js' %}"></script>
+  {% load static %} <script type="text/javascript" src="{% static 'GNews/js/bootstrap.min.js' %}"></script>
+  {% load static %} <script type="text/javascript" src="{% static 'GNews/js/HoldOn.min.js' %}"></script>
+  {% load static %} <script type="text/javascript" src="{% static 'GNews/js/custom.js' %}"></script>
+  {% load static %} <script type="text/javascript" src="{% static 'GNews/js/jquery.json-viewer.js' %}"></script>
+
+</head>
+
+<body>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              {% load static %} <img src="{% static 'GNews/images/logo-white.svg' %}" alt="logo" />
+          </div>
+      </div>
+  
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#top-news" onclick="hideMessages(); resetTopNewsTab()">Top News Article</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#search" onclick="hideMessages(); resetSearchNewsTab()">Search</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="alert alert-danger" role="alert" id="error"></div>
+      <div class="alert alert-info" role="alert" id="info"></div>
+
+      <div class="tab-pane container active" id="top-news">
+        {% block top_news %}
+           {% include "GNews/top_news.html" %}
+        {% endblock %}
+      </div>
+      <div class="tab-pane container fade" id="search">
+        {% block search_news %}
+           {% include "GNews/search_news.html" %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

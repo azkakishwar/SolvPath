@@ -1,0 +1,42 @@
+
+<div class="card">
+           <div class="card-header">
+            Top News Articles
+          </div>
+          <div class="card-body">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="maxTopNews">Number of Articles</label>
+                  <input type="number" min=1 max=20 class="form-control" id="maxTopNews"name="maxTopNews" placeholder="Enter number of articles" required="">
+                  <small class="form-text text-muted">
+                    The maximum number of articles can be 20.
+                  </small>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lang">Select Language</label>
+                  <select class="form-control" id="langTopNews" name="langTopNews" required="">
+                    {% block top_news_lang_options %}
+                       {% include "GNews/lang_options.html" %}
+                    {% endblock %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-11"></div>
+                <div class="form-group col-md-1">
+                    <button type="button" class="btn btn-info float-right" onclick="getTopNews()">Search</button>                  
+                </div>
+              </div>
+            </form>
+            <div class="card" id="topNewsResults">
+              <div class="card-header">
+                  Results
+              </div>
+              <div class="card-body">
+                <div id="topNewsJsonViewer"></div>
+              </div>
+            </div>         
+          </div>
+        </div>
