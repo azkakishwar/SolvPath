@@ -23,7 +23,7 @@ The articles returned are displayed in a interactive JSON format.
 #Installation Guide
 * Download the code from https://github.com/azkakishwar/SolvPath
 * Go to the SolvPath folder and run following commands
-  * Install python using https://realpython.com/installing-python/
+  * Install python3 using https://realpython.com/installing-python/
   * Run ```pip install -r requirements.txt  ```
   * Setup .env file using following steps
     * Create an .env file in SolvPath/SolvPath
