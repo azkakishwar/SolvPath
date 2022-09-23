@@ -29,7 +29,6 @@ The articles returned are displayed in a interactive JSON format.
     * Create an .env file in SolvPath/SolvPath
     * Copy the contents of SolvPath/.env.example and paste then in your created .env file
     * Get API key for GNews API by registering at https://gnews.io/register. You can also use the API key mentioned in .env.example
-    * Copy you SECRET_KEY from SolvPath/SolvPath/settings.py and paste it in .env
   * Run ``` python manage.py runserver```. The server will be running at http://127.0.0.1:8000/
   * Access the API service by using http://127.0.0.1:8000/gnews 
 
